@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-lg-12">
+  	<button class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Add</button>
+    <h1>Inventory <small> 100 items</small></h1>
+    <ol class="breadcrumb">
+      <li class="active"><i class="icon-file-alt"></i> Inventory</li>
+    </ol>
+  </div>
+</div><!-- /.row -->
+
+<div class="row">
+	<div class="col-lg-12">
+		<h2>Items</h2>
+		<div class="table-responsive">
+		  <table class="table table-hover tablesorter">
+		  	<thead>
+		  		<tr>
+		  			<td></td>
+			  		<td>Simple Name</td>
+			  		<td>Category</td>
+			  		<td>Location</td>
+		  		</tr>
+		  	</thead>
+		  	<tbody>
+		  		<tr>
+						<td><a href="/items/info/1"><span class="label label-primary">Info</span></a></td>
+						<td>Some Name</td>
+						<td>Some Category</td>
+						<td>Somewhere</td>
+					</tr>
+		  		<% @widget_list.each do |w| %>
+						<tr>
+							<!-- <td><a href="/items/info/1"><span class="label label-primary">Info</span></a></td> -->
+							<td>
+								<%= link_to(action: "info", id: w) do %>
+									<span class="label label-primary">Info</span>
+								<% end %>
+							</td>
+							<td><%= w.simple_name %></td>
+							<td>TODO Category</td>
+							<td><%= w.location %></td>
+						</tr>
+					<% end %>
+		  	</tbody>
+		  </table>
+		</div> <!-- .table-responsive -->
+	</div> <!-- .col -->
+</div> <!-- .row -->
