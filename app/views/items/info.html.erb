@@ -103,12 +103,12 @@
 				      </tr>
 				    </thead>
 				    <tbody>
-							<% Widget.collection.aggregate([ {"$match" => {"_id" => @active_widget._id }}, {"$unwind" => "$services"}, {"$sort" => {"services.start" => -1}} ]).each do |s| %>
+							<% @service_list.each do |s| %>
 								<tr>
-									<td><%= "#{s['services']['short_description']}" %></td>
-									<td><%= complete_label(s['services']['completed']).html_safe %></td>
-									<td><%= s['services']['start'] %></td>
-									<td><%= s['services']['finish'] ? s['services']['finish'] : "-----" %></td>
+									<td><%= s.short_description %></td>
+									<td><%= complete_label(s.completed).html_safe %></td>
+									<td><%= s.start %></td>
+									<td><%= s.finish ? s.finish : "-----" %></td>
 									<td><a href="#"><span class="label label-primary">Notes</span></a></td>
 								</tr>
 							<% end %>

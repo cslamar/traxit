@@ -5,5 +5,6 @@ class ItemsController < ApplicationController
 
   def info
   	@active_widget = Widget.find(params[:id])
+  	@service_list = @active_widget.services.sort_by{|e| e[:start]}.reverse
   end
 end
