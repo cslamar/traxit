@@ -113,8 +113,8 @@
 										<div class="dropdown">
 											<a href="#" data-toggle="dropdown" class="btn btn-primary btn-xs">Actions <span class="caret"></span></a>
 											<ul class="dropdown-menu pull-right">
-												<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Notes</a></li>
 												<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Complete</a></li>
+												<li role="presentation"><%= link_to 'Notes', notes_path(:pid => @active_widget.id, :si => s.to_json), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#notes-modal"} %></li>
 											</ul>
 										</div> <!-- .dropdown -->
 									</td>
@@ -127,3 +127,6 @@
   	</div> <!-- .panel -->
   </div> <!-- .col -->
 </div> <!-- .row -->
+
+<!-- Notes Modal -->
+<div class="modal fade" id="notes-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
