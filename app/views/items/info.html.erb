@@ -78,7 +78,7 @@
 				<h3 class="panel-title">Image</h3>
 			</div> <!-- .panel-header -->
 			<div class="panel-body text-center">
-				<!-- <%= image_tag "mbp.png", class: 'img-thumbnail img-responsive' %> -->
+				<%= image_tag "/media/#{@active_widget.id}.png", class: 'img-thumbnail img-responsive' %>
 			</div> <!-- .panel-body -->
 		</div> <!-- .panel -->
 	</div> <!-- .col -->
@@ -109,7 +109,15 @@
 									<td><%= complete_label(s.completed).html_safe %></td>
 									<td><%= s.start %></td>
 									<td><%= s.finish ? s.finish : "-----" %></td>
-									<td><a href="#"><span class="label label-primary">Notes</span></a></td>
+									<td>
+										<div class="dropdown">
+											<a href="#" data-toggle="dropdown" class="btn btn-primary btn-xs">Actions <span class="caret"></span></a>
+											<ul class="dropdown-menu pull-right">
+												<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Notes</a></li>
+												<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Complete</a></li>
+											</ul>
+										</div> <!-- .dropdown -->
+									</td>
 								</tr>
 							<% end %>
 				    </tbody>
