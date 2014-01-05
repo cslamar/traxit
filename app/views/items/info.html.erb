@@ -29,10 +29,10 @@
 			</li>
 		</ul> <!-- action icons without labels -->
 
-    <h1>Item 1</h1>
+    <h1><%= @active_widget.simple_name %></h1>
     <ol class="breadcrumb">
       <li><a href="/items"><i class="icon-dashboard"></i> Inventory</a></li>
-      <li class="active"><i class="icon-file-alt"></i> Item 1</li>
+      <li class="active"><i class="icon-file-alt"></i> <%= @active_widget.simple_name %></li>
     </ol>
   </div> <!-- .col -->
 </div><!-- /.row -->
@@ -47,9 +47,8 @@
 			<div class="panel-body">
 				<ul>
 					<li>ID: <%= @active_widget.id %></li>
-					<li>Description: Laptop</li>
-					<li>Location: Office</li>
-					<li>Handler:</li>
+					<li>Location: <%= @active_widget.location %></li>
+					<li>Assigned to: TO_ADD-Person</li>
 					<li>Status: <span class="label label-success">In</span></li>
 				</ul>				
 			</div> <!-- .panel-body -->
@@ -64,12 +63,9 @@
 			</div> <!-- .panel-heading -->
 			<div class="panel-body">
 				<ul>
-					<li>Short Description: Laptop</li>
-					<li>Make: Apple</li>
-					<li>Model: MacBook Pro '13</li>
-					<li>SN: 123456789</li>
-					<li>Long Desciption: Generic Laptop</li>
-					<li>Type: Computer</li>
+					<% @active_widget.properties.each do |(key, value)| %>
+						<li><%= "#{key}: #{value}" %></li>
+					<% end %>
 				</ul>
 			</div> <!-- .panel-body -->
 		</div> <!-- .panel -->
@@ -92,38 +88,30 @@
   <div class="col-lg-12">
   	<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">Tracking History</h3>
+				<h3 class="panel-title">Service History</h3>
 			</div> <!-- .panel-header -->
 			<div class="panel-body">
 				<div class="table-responsive">
 				  <table class="table table-hover tablesorter">
 				    <thead>
 				      <tr>
-				        <th>Status</th>
-				        <th>Date</th>
-				        <th>Location</th>
-				        <th>Handler</th>
-				        <th>Issuer</th>
+				        <th>Short Description</th>
+				        <th>Complete?</th>
+				        <th>Start Date</th>
+				        <th>Completed Date</th>
 				        <th></th>
 				      </tr>
 				    </thead>
 				    <tbody>
-							<tr>
-								<td>Checked Out</td>
-								<td>1/2/2013</td>
-								<td>Some Location</td>
-								<td>Johnny Doe</td>
-								<td>Employee A</td>
-								<td><a href="#"><span class="label label-primary">Notes</span></a></td>
-							</tr>
-							<tr>
-								<td>Checked In</td>
-								<td>2/3/2013</td>
-								<td>Office</td>
-								<td>Johnny Doe</td>
-								<td>Employee A</td>
-								<td><a href="#"><span class="label label-primary">Notes</span></a></td>
-							</tr>
+				    	<% @active_widget.services.each do |s| %>
+								<tr>
+									<td><%= "#{s.short_description}" %></td>
+									<td><%= complete_label(s.completed).html_safe %></td>
+									<td><%= s.start %></td>
+									<td><%= s.finish ? s.finish : "-----" %></td>
+									<td><a href="#"><span class="label label-primary">Notes</span></a></td>
+								</tr>
+							<% end %>
 				    </tbody>
 				  </table>
 				</div> <!-- .table-responsive -->
