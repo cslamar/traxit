@@ -110,14 +110,7 @@
 									<td><%= s.start %></td>
 									<td><%= s.finish ? s.finish : "-----" %></td>
 									<td>
-										<div class="dropdown">
-											<a href="#" data-toggle="dropdown" class="btn btn-primary btn-xs">Actions <span class="caret"></span></a>
-											<ul class="dropdown-menu pull-right">
-												<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Complete</a></li>
-												<li role="presentation"><%= link_to 'Notes', notes_path(:pid => @active_widget.id, :si => s.to_json), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#notes-modal"} %></li>
-											</ul>
-										</div> <!-- .dropdown -->
-									</td>
+									<td><%= link_to 'Notes', notes_path(:wid => @active_widget.id, :sid => s.id), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#notes-modal", :class => "btn btn-xs btn-primary"} %></td>
 								</tr>
 							<% end %>
 				    </tbody>

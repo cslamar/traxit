@@ -9,8 +9,11 @@ class ItemsController < ApplicationController
   end
 
   def notes
-  	@pid = params[:pid]
-  	@si = ActiveSupport::JSON.decode(params[:si])
+  	@wid = params[:wid]
+  	sid = params[:sid]
+
+  	@active_widget = Widget.find(@wid)
+  	@service = @active_widget.services.find(sid)
 
   	respond_to do |format|
   		format.html
