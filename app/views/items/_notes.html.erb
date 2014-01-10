@@ -5,12 +5,44 @@
       <h4 class="modal-title" id="myModalLabel"><%= @service.short_description %></h4>
     </div>
     <div class="modal-body">
+      <div class="alert alert-success notes-alert" hidden>Oh Snap, an alert!</div>
       <h4>Long Description:</h4>
       <p><%= @service.long_description %></p>
+
+      <div class="form-group">
+        <label for="completion-date">Completion Date</label>
+        <input type="date" class="form-control" id="completion-date">
+      </div>
+
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary">Complete</button>
+      <button id="complete-btn" type="button" class="btn btn-primary">Complete</button>
       <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
     </div> <!-- .modal-footer -->
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
+
+<script>
+  $('#complete-btn').click(function(event) {
+    $.ajax({
+      url: '/items/complete',
+      type: 'PATCH',
+      dataType: 'json',
+      data: {param1: 'value1'},
+    })
+    .done(function(e) {
+      console.log(e);
+      console.log("success");
+      $('div.notes-alert').toggle('fast');
+
+      // setTimeout(function() {
+      //   $('#notes-modal').modal('hide');
+      // }, 2000);
+
+    })
+    .fail(function(e) {
+      console.log(e);
+      console.log("error");
+    });
+  });
+</script>

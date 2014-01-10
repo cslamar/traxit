@@ -20,4 +20,11 @@ class ItemsController < ApplicationController
   		format.js
   	end
   end
+
+  def complete
+  	respond_to do |format|
+  		format.json { render json: {'something' => 'asdf'}, status: :ok }
+  	end
+  end
+
 end
