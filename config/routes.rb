@@ -7,7 +7,7 @@ Traxit::Application.routes.draw do
   post 'items/service_create/:id' => 'items#service_create'
 
   get 'items/info/:id' => 'items#info'
-  get 'items/notes' => 'items#notes', :as => :notes
+  get 'items/notes/:wid/:sid' => 'items#notes', :as => :notes
   get 'items' => 'items#list'
 
   # The priority is based upon order of creation: first created -> highest priority.
