@@ -14,7 +14,7 @@
 
 <script>
   $('#complete-btn').click(function(event) {
-    var complete_date = $('#completion-date').prop('value');;
+    var complete_date = $('#completion-date').prop('value');
 
     var wid = "<%= @active_widget.id %>";
     var sid = "<%= @service.id %>";
@@ -33,6 +33,38 @@
       console.log(e);
       console.log("success");
       $('div.notes-alert').html("<p>Service Completed</p>");
+      $('div.notes-alert').toggle('fast');
+
+      setTimeout(function() {
+        $('#notes-modal').modal('hide');
+        location.reload(true);
+      }, 2000);
+
+    })
+    .fail(function(e) {
+      console.log(e);
+      console.log("error");
+    });
+  });
+
+  $('#reset-btn').click(function(event) {
+
+    var wid = "<%= @active_widget.id %>";
+    var sid = "<%= @service.id %>";
+
+    $.ajax({
+      url: '/items/reset',
+      type: 'PATCH',
+      dataType: 'json',
+      data: {
+        'wid' : wid,
+        'sid' : sid,
+      },
+    })
+    .done(function(e) {
+      console.log(e);
+      console.log("success");
+      $('div.notes-alert').html("<p>Completed Date Reset</p>");
       $('div.notes-alert').toggle('fast');
 
       setTimeout(function() {

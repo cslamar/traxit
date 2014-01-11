@@ -41,4 +41,22 @@ class ItemsController < ApplicationController
 
   end
 
+  def reset
+  	wid = params[:wid]
+  	sid = params[:sid]
+
+  	active_widget = Widget.find(wid)
+  	active_service = active_widget.services.detect {|s| s["_id"].to_s == sid }
+
+  	active_service.completed = false
+  	active_service.unset(:finish)
+
+  	if active_service.save
+	  	respond_to do |format|
+	  		format.json { render json: {'something' => 'asdf'}, status: :ok }
+	  	end
+	  end
+
+  end
+
 end

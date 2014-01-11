@@ -1,6 +1,7 @@
 Traxit::Application.routes.draw do
 
   patch 'items/complete' => 'items#complete'
+  patch 'items/reset' => 'items#reset'
   get 'items/info/:id' => 'items#info'
   get 'items/notes' => 'items#notes', :as => :notes
   get 'items' => 'items#list'
