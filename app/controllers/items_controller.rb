@@ -21,6 +21,29 @@ class ItemsController < ApplicationController
   	end
   end
 
+  def service_add
+  	@wid = params[:id]
+
+  	# @simple_name = params[:simple_name]
+  	# @active_widget = Widget.find(@wid)
+
+  	respond_to do |format|
+  		format.html
+  		format.js
+  	end
+  end
+
+  def service_create
+  	puts "Create #{params[:id]}"
+
+  	# redirect_to(:action => 'list')
+
+  	flash[:notice] = 'Created Service Task'
+  	flash[:status] = 'success'
+  	
+  	redirect_to :back
+  end
+
   def complete
   	wid = params[:wid]
   	sid = params[:sid]
@@ -38,7 +61,6 @@ class ItemsController < ApplicationController
 	  		format.json { render json: {'something' => 'asdf'}, status: :ok }
 	  	end
 	  end
-
   end
 
   def reset
@@ -56,7 +78,6 @@ class ItemsController < ApplicationController
 	  		format.json { render json: {'something' => 'asdf'}, status: :ok }
 	  	end
 	  end
-
   end
 
 end

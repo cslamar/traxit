@@ -1,4 +1,16 @@
 <div class="row">
+	<div class="col-lg-12">
+			<% if !flash[:notice].blank? %>
+		    <div class="alert alert-<%= flash[:status] %> alert-dismissable">
+		    	<div class="container">
+			      <%= flash[:notice] %>
+		      </div> <!-- .container -->
+			  </div> <!-- .alert -->
+			<% end %>
+	</div> <!-- .col-lg-12 -->
+</div> <!-- .row -->
+
+<div class="row">
   <div class="col-lg-12">
 
 		<ul class="pull-right hidden-xs">
@@ -88,6 +100,9 @@
   <div class="col-lg-12">
   	<div class="panel panel-default">
 			<div class="panel-heading">
+				<%= link_to service_add_path({:id => @active_widget.id}), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#service-add-modal", :class => "btn btn-xs btn-default pull-right"} do %>
+					<span class="glyphicon glyphicon-plus"></span>
+				<% end %>
 				<h3 class="panel-title">Service History</h3>
 			</div> <!-- .panel-header -->
 			<div class="panel-body">
@@ -123,3 +138,4 @@
 
 <!-- Notes Modal -->
 <div class="modal fade" id="notes-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="service-add-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
