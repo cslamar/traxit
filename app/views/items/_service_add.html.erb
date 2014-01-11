@@ -8,15 +8,15 @@
       <%= form_tag({controller: 'items', action: 'service_create', id: @wid}, method: 'post') do %>
         <div class="form-group">
           <label for="short_description">Short Description</label>
-          <input type="text" class="form-control" id="short_description" placeholder="Enter quick description">
+          <input type="text" class="form-control" id="short_description" name="short_description" placeholder="Enter quick description" required>
         </div> <!-- short description -->
         <div class="form-group">
           <label for="long_description">Long Description</label>
-          <textarea name="long_description" id="long_description" rows="4" class="form-control" placeholder="Enter a detailed description of the service work"></textarea>
+          <textarea name="long_description" id="long_description" rows="4" class="form-control" placeholder="Enter a detailed description of the service work" required></textarea>
         </div> <!-- long description -->
         <div class="form-group">
-          <label for="completion-date">Start Date</label>
-          <input type="date" class="form-control" id="start-date">
+          <label for="start">Start Date</label>
+          <input type="date" class="form-control" id="start" name="start" required>
         </div> <!-- start date -->
 
         </div> <!-- .modal-body -->

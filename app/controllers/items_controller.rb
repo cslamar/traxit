@@ -34,14 +34,22 @@ class ItemsController < ApplicationController
   end
 
   def service_create
-  	puts "Create #{params[:id]}"
+  	# puts "Create #{params[:id]}"
 
-  	# redirect_to(:action => 'list')
+  	w = Widget.find(params[:id])
+  	s = Service.new(start: params[:start], short_description: params[:short_description], long_description: params[:long_description])
 
-  	flash[:notice] = 'Created Service Task'
-  	flash[:status] = 'success'
-  	
-  	redirect_to :back
+  	if w.services << s
+  		flash[:notice] = 'Created Service Task'
+  		flash[:status] = 'success'
+
+  		redirect_to :back
+  	else
+  		flash[:notice] = 'Failed to add Service Task'
+  		flash[:status] = 'danger'
+
+  		redirect_to :back
+  	end
   end
 
   def complete
