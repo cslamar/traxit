@@ -29,11 +29,6 @@
     var wid = "<%= @active_widget.id %>";
     var sid = "<%= @service.id %>";
 
-    console.log("wid: " + wid);
-    console.log("sid: " + sid);
-
-    console.log("date: " + complete_date);
-
     $.ajax({
       url: '/items/complete',
       type: 'PATCH',
@@ -47,11 +42,13 @@
     .done(function(e) {
       console.log(e);
       console.log("success");
+      $('div.notes-alert').html("<p>Service Completed</p>");
       $('div.notes-alert').toggle('fast');
 
-      // setTimeout(function() {
-      //   $('#notes-modal').modal('hide');
-      // }, 2000);
+      setTimeout(function() {
+        $('#notes-modal').modal('hide');
+        location.reload(true);
+      }, 2000);
 
     })
     .fail(function(e) {
