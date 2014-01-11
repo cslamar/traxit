@@ -24,11 +24,25 @@
 
 <script>
   $('#complete-btn').click(function(event) {
+    var complete_date = $('#completion-date').prop('value');;
+
+    var wid = "<%= @active_widget.id %>";
+    var sid = "<%= @service.id %>";
+
+    console.log("wid: " + wid);
+    console.log("sid: " + sid);
+
+    console.log("date: " + complete_date);
+
     $.ajax({
       url: '/items/complete',
       type: 'PATCH',
       dataType: 'json',
-      data: {param1: 'value1'},
+      data: {
+        'wid' : wid,
+        'sid' : sid,
+        'complete_date' : complete_date,
+      },
     })
     .done(function(e) {
       console.log(e);
