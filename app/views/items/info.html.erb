@@ -110,7 +110,11 @@
 									<td><%= s.start %></td>
 									<td><%= s.finish ? s.finish : "-----" %></td>
 									<td>
-									<td><%= link_to 'Notes', notes_path(:wid => @active_widget.id, :sid => s.id), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#notes-modal", :class => "btn btn-xs btn-primary"} %></td>
+									<td>
+										<%= link_to notes_path(:wid => @active_widget.id, :sid => s.id), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#notes-modal"} do %>
+											<span class="label label-primary">Notes</span>
+										<% end %>
+									</td>
 								</tr>
 							<% end %>
 				    </tbody>
