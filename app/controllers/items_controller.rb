@@ -88,4 +88,11 @@ class ItemsController < ApplicationController
 	  end
   end
 
+  def qr
+  	respond_to do |format|
+  		format.html
+  		format.svg { render :qrcode => "http://172.16.13.88:3000/items/info/#{params[:id]}", :level => :l, :unit => 10 }
+  	end
+  end
+
 end

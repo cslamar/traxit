@@ -43,3 +43,6 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'mongoid', git: "git://github.com/mongoid/mongoid.git"
+
+gem 'rqrcode-rails3'
+gem 'mini_magick'

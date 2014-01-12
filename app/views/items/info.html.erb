@@ -14,7 +14,11 @@
   <div class="col-lg-12">
 
 		<ul class="pull-right hidden-xs">
-			<li class="action-items"><button class="btn btn-default">Generate QR <span class="glyphicon glyphicon-qrcode"></span></button></li>
+			<li class="action-items">
+				<%= link_to qr_code_path(:id => @active_widget.id, :format => 'svg') do %>
+					<button class="btn btn-default">Generate QR <span class="glyphicon glyphicon-qrcode"></span></button>
+				<% end %>
+			</li>
 			<li class="action-items">
 				<div class="dropdown">
 				  <a data-toggle="dropdown" href="#"><button class="btn btn-default">Check in/out <span class="glyphicon glyphicon-ok"></span> <span class="caret"></span></button></a>
