@@ -23,3 +23,4 @@ config/mongoid.yml
 config/initializers/secret_token.rb
 *.sublime-*
 public/media
+.idea/
