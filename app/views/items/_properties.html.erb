@@ -8,13 +8,13 @@
       <div class="alert alert-success notes-alert" hidden>Oh Snap, an alert!</div>
 
       <ul id="prop-list">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" action="" method="post">
           <% @active_widget.properties.each do |(key, value)| %>
             <li class="prop-item">
               <div class="form-group">
                 <label for="<%= key %>" class="col-sm-3 control-label"><%= key %></label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" id="<%= key %>" value="<%= value %>">
+                  <input type="text" class="form-control" id="<%= key %>" name="<%= key %>" value="<%= value %>">
                 </div> <!-- .col-sm-10 -->
               </div> <!-- .form-group -->
             </li>
@@ -33,13 +33,29 @@
 </div><!-- /.modal-dialog -->
 
 <script>
+
+  $.fn.serializeObject = function() {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+      if (o[this.name] !== undefined) {
+        if (!o[this.name].push) {
+          o[this.name] = [o[this.name]];
+        }
+        o[this.name].push(this.value || '');
+      } else {
+        o[this.name] = this.value || '';
+      }
+    });
+    return o;
+  };
+
   var counter = 0;
 
   $('#add-field').click(function(event) {
     event.preventDefault();
 
     counter++;
-    console.log("Counter: " + counter);
 
     $.ajax({
       url: '/items/new_field/' + counter,
@@ -55,5 +71,30 @@
       console.log(e);
       console.log("error");
     });
+  });
+
+  $('#complete-btn').click(function(event){
+//    event.preventDefault();
+
+    var form_data = JSON.stringify( $('form').serializeObject() );
+//    var form_data = $("form").serialize();
+    console.log(form_data);
+
+    $.ajax({
+      url: '/items/update_properties/' + "<%= @active_widget.id %>",
+      type: 'POST',
+      dataType: 'json',
+      data: { props : form_data}
+    })
+    .done(function(e){
+      console.log(e);
+      console.log('success');
+//      location.reload();
+    })
+    .fail(function(e){
+      console.log(e);
+      console.log('error!!');
+    });
+
   });
 </script>

@@ -114,4 +114,16 @@ class ItemsController < ApplicationController
     render partial: 'items/new_field'
   end
 
+  def update_properties
+
+    props = ActiveSupport::JSON.decode(params[:props])
+    puts "JSON: #{props}"
+    puts "ID: #{params[:id]}"
+
+    respond_to do |format|
+      format.json { render json: {'something' => 'asdf'}, status: :ok }
+    end
+
+  end
+
 end
