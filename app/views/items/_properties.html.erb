@@ -42,6 +42,6 @@
 <script>
   $('#add-field').click(function(event) {
     event.preventDefault();
-    $('<li><p>Test</p></li>').insertBefore('li.add-list-item');
+    $("<%= escape_javascript(render 'items/new_field') %>").insertBefore('li.add-list-item');
   });
 </script>
