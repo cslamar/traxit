@@ -1,0 +1,58 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel"><%= @service.short_description %></h4>
+    </div>
+    <% if @service.completed %>
+      <%= render(:partial => "completed") %>
+    <% else %>
+      <%= render(:partial => "to_complete") %>
+    <% end %>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+<script>
+  function processAction(action, item_data){
+    $.ajax({
+      url: '/items/' + action,
+      type: 'PATCH',
+      dataType: 'json',
+      data: item_data,
+    })
+    .done(function(e) {
+      console.log(e);
+      console.log("success");
+      $('div.notes-alert').html("<p>Completed</p>");
+      $('div.notes-alert').toggle('fast');
+
+      setTimeout(function() {
+        $('#notes-modal').modal('hide');
+        location.reload(true);
+      }, 2000);
+
+    })
+    .fail(function(e) {
+      console.log(e);
+      console.log("error");
+    });
+  }
+
+  $('#complete-btn').click(function(event) {
+    var complete_date = $('#completion-date').prop('value');
+    var wid = "<%= @active_widget.id %>";
+    var sid = "<%= @service.id %>";
+    var item_data = { 'wid' : wid, 'sid' : sid, 'complete_date' : complete_date };
+
+    processAction('complete', item_data);
+
+  });
+
+  $('#reset-btn').click(function(event) {
+    var wid = "<%= @active_widget.id %>";
+    var sid = "<%= @service.id %>";
+    var item_data = { 'wid' : wid, 'sid' : sid };
+
+    processAction('reset', item_data);
+  });
+</script>

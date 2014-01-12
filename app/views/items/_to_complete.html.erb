@@ -1,0 +1,15 @@
+<div class="modal-body">
+  <div class="alert alert-success notes-alert" hidden>Oh Snap, an alert!</div>
+  <h4>Long Description:</h4>
+  <p><%= @service.long_description %></p>
+
+  <div class="form-group">
+    <label for="completion-date">Completion Date</label>
+    <input type="date" class="form-control" id="completion-date">
+  </div>
+
+</div> <!-- .modal-body -->
+<div class="modal-footer">
+  <button id="complete-btn" type="button" class="btn btn-primary">Complete</button>
+  <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+</div> <!-- .modal-footer -->

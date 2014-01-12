@@ -1,6 +1,13 @@
 Traxit::Application.routes.draw do
 
+  patch 'items/complete' => 'items#complete'
+  patch 'items/reset' => 'items#reset'
+  
+  get 'items/service_add/:id' => 'items#service_add', :as => :service_add
+  post 'items/service_create/:id' => 'items#service_create'
+
   get 'items/info/:id' => 'items#info'
+  get 'items/notes/:wid/:sid' => 'items#notes', :as => :notes
   get 'items' => 'items#list'
 
   # The priority is based upon order of creation: first created -> highest priority.
