@@ -6,6 +6,8 @@ Traxit::Application.routes.draw do
   get 'items/service_add/:id' => 'items#service_add', :as => :service_add
   post 'items/service_create/:id' => 'items#service_create'
 
+  get 'items/properties/:id' => 'items#properties', :as => :properties
+
   get 'items/qr/:id' => 'items#qr', :as => :qr_code
   get 'items/info/:id' => 'items#info'
   get 'items/notes/:wid/:sid' => 'items#notes', :as => :notes

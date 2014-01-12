@@ -1,0 +1,47 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel"><%= "#{@active_widget.simple_name}'s Properties" %></h4>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-success notes-alert" hidden>Oh Snap, an alert!</div>
+
+      <ul id="prop-list">
+        <form class="form-horizontal" role="form">
+          <% @active_widget.properties.each do |(key, value)| %>
+            <li class="prop-item">
+              <div class="form-group">
+                <label for="<%= key %>" class="col-sm-3 control-label"><%= key %></label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="<%= key %>" value="<%= value %>">
+                </div> <!-- .col-sm-10 -->
+              </div> <!-- .form-group -->
+            </li>
+          <% end %>
+
+          <li class="prop-item add-list-item">
+            <div class="form-group">
+              <div class="col-sm-3">
+                <button id="add-field" class="btn btn-sm btn-success pull-right"><span class="glyphicon glyphicon-plus"></span></button>      
+              </div> <!-- .col-sm-3 -->
+            </div> <!-- .form-group -->
+          </li>
+
+        </form>
+      </ul> <!-- #prop-list -->
+
+    </div> <!-- .modal-body -->
+    <div class="modal-footer">
+      <button id="complete-btn" type="button" class="btn btn-primary">Update</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+    </div> <!-- .modal-footer -->
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+<script>
+  $('#add-field').click(function(event) {
+    event.preventDefault();
+    $('<li><p>Test</p></li>').insertBefore('li.add-list-item');
+  });
+</script>

@@ -74,7 +74,9 @@
 	<div class="col-lg-5">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<button class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-pencil"></span></button>
+				<%= link_to properties_path(id: @active_widget.id), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#properties-modal"} do %>
+					<button class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-pencil"></span></button>
+				<% end %>
 				<h3 class="panel-title">Item Description</h3>
 			</div> <!-- .panel-heading -->
 			<div class="panel-body">
@@ -147,3 +149,4 @@
 <!-- Notes Modal -->
 <div class="modal fade" id="notes-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <div class="modal fade" id="service-add-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="properties-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

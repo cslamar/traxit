@@ -33,6 +33,17 @@ class ItemsController < ApplicationController
   	end
   end
 
+  def properties
+  	wid = params[:id]
+
+  	@active_widget = Widget.find(wid)
+
+  	respond_to do |format|
+  		format.html
+  		format.js
+  	end
+  end
+
   def service_create
   	# puts "Create #{params[:id]}"
 
