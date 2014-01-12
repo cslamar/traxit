@@ -21,6 +21,37 @@ class ItemsController < ApplicationController
   	end
   end
 
+  def service_add
+  	@wid = params[:id]
+
+  	# @simple_name = params[:simple_name]
+  	# @active_widget = Widget.find(@wid)
+
+  	respond_to do |format|
+  		format.html
+  		format.js
+  	end
+  end
+
+  def service_create
+  	# puts "Create #{params[:id]}"
+
+  	w = Widget.find(params[:id])
+  	s = Service.new(start: params[:start], short_description: params[:short_description], long_description: params[:long_description])
+
+  	if w.services << s
+  		flash[:notice] = 'Created Service Task'
+  		flash[:status] = 'success'
+
+  		redirect_to :back
+  	else
+  		flash[:notice] = 'Failed to add Service Task'
+  		flash[:status] = 'danger'
+
+  		redirect_to :back
+  	end
+  end
+
   def complete
   	wid = params[:wid]
   	sid = params[:sid]
@@ -38,7 +69,6 @@ class ItemsController < ApplicationController
 	  		format.json { render json: {'something' => 'asdf'}, status: :ok }
 	  	end
 	  end
-
   end
 
   def reset
@@ -56,7 +86,6 @@ class ItemsController < ApplicationController
 	  		format.json { render json: {'something' => 'asdf'}, status: :ok }
 	  	end
 	  end
-
   end
 
 end

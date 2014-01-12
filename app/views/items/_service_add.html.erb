@@ -1,0 +1,29 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">New Service Action</h4>
+    </div>
+    <div class="modal-body">
+      <%= form_tag({controller: 'items', action: 'service_create', id: @wid}, method: 'post') do %>
+        <div class="form-group">
+          <label for="short_description">Short Description</label>
+          <input type="text" class="form-control" id="short_description" name="short_description" placeholder="Enter quick description" required>
+        </div> <!-- short description -->
+        <div class="form-group">
+          <label for="long_description">Long Description</label>
+          <textarea name="long_description" id="long_description" rows="4" class="form-control" placeholder="Enter a detailed description of the service work" required></textarea>
+        </div> <!-- long description -->
+        <div class="form-group">
+          <label for="start">Start Date</label>
+          <input type="date" class="form-control" id="start" name="start" required>
+        </div> <!-- start date -->
+
+        </div> <!-- .modal-body -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= submit_tag("Create Service Task", class: "btn btn-primary") %>
+        </div> <!-- .modal-footer -->
+      <% end %>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
