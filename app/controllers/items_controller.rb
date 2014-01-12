@@ -110,4 +110,8 @@ class ItemsController < ApplicationController
   	end
   end
 
+  def new_field
+    render partial: 'items/new_field'
+  end
+
 end

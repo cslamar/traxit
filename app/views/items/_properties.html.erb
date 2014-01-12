@@ -20,19 +20,12 @@
             </li>
           <% end %>
 
-          <li class="prop-item add-list-item">
-            <div class="form-group">
-              <div class="col-sm-3">
-                <button id="add-field" class="btn btn-sm btn-success pull-right"><span class="glyphicon glyphicon-plus"></span></button>      
-              </div> <!-- .col-sm-3 -->
-            </div> <!-- .form-group -->
-          </li>
-
         </form>
       </ul> <!-- #prop-list -->
 
     </div> <!-- .modal-body -->
     <div class="modal-footer">
+      <button id="add-field" class="btn btn-success pull-left"><span class="glyphicon glyphicon-plus"></span> Add Field</button>
       <button id="complete-btn" type="button" class="btn btn-primary">Update</button>
       <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
     </div> <!-- .modal-footer -->
@@ -40,8 +33,27 @@
 </div><!-- /.modal-dialog -->
 
 <script>
+  var counter = 0;
+
   $('#add-field').click(function(event) {
     event.preventDefault();
-    $("<%= escape_javascript(render 'items/new_field') %>").insertBefore('li.add-list-item');
+
+    counter++;
+    console.log("Counter: " + counter);
+
+    $.ajax({
+      url: '/items/new_field/' + counter,
+      type: 'GET'
+    })
+    .done(function(e) {
+//      console.log(e);
+      console.log("success");
+
+      $(e).insertAfter('li.prop-item:last');
+    })
+    .fail(function(e) {
+      console.log(e);
+      console.log("error");
+    });
   });
 </script>

@@ -1,11 +1,11 @@
 <li class="prop-item">
   <div class="form-group">
     <div class="col-sm-3">
-      <input type="text" class="form-control" placeholder="Field Key">
+      <input type="text" id="new-key-<%= params[:unique] %>" name="new-key-<%= params[:unique] %>" class="form-control" placeholder="Field Key">
     </div>
 
     <div class="col-sm-9">
-      <input type="text" class="form-control" placeholder="Field Value">
+      <input type="text" id="new-value-<%= params[:unique] %>" name="new-value-<%= params[:unique] %>" class="form-control" placeholder="Field Value">
     </div> <!-- .col-sm-10 -->
   </div> <!-- .form-group -->
 </li>
