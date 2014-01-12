@@ -91,7 +91,11 @@ class ItemsController < ApplicationController
   def qr
   	respond_to do |format|
   		format.html
-  		format.svg { render :qrcode => "http://172.16.13.88:3000/items/info/#{params[:id]}", :level => :l, :unit => 10 }
+  		## Prod
+  		# format.svg { render :qrcode => "#{request.protocol}#{request.host}:#{request.port}/items/info/#{params[:id]}", :level => :l, :unit => 10 }
+
+  		## Dev
+  		format.svg { render :qrcode => "#{request.protocol}#{request.host}:#{request.port}/items/info/#{params[:id]}", :level => :l, :unit => 10 }
   	end
   end
 
