@@ -150,4 +150,13 @@ class ItemsController < ApplicationController
     redirect_to :back
   end
 
+  def image
+    @active_widget = params[:id]
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
 end

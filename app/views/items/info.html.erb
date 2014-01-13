@@ -92,7 +92,9 @@
 	<div class="col-lg-3">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-                <a href="#image-modal" data-toggle="modal"><button class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-pencil"></span></button></a>
+        <%= link_to item_image_path({:id => @active_widget.id}), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#image-modal", :class => "btn btn-xs btn-default pull-right"} do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
 				<h3 class="panel-title">Image</h3>
 			</div> <!-- .panel-header -->
 			<div class="panel-body text-center">
@@ -150,22 +152,4 @@
 <div class="modal fade" id="notes-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <div class="modal fade" id="service-add-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <div class="modal fade" id="properties-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
-
-<div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Image</h4>
-      </div>
-      <div class="modal-body">
-        <%= form_tag({action: :update_image}, multipart: true, method: "POST") do %>
-          <%= label_tag(:image, "Choose Image to upload: ") %>
-          <%= file_field_tag(:image) %>
-          <%= hidden_field_tag(:wid, @active_widget.id) %>
-          <%= submit_tag("Upload", class: "btn btn-primary") %>
-        <% end %>
-      </div> <!-- .modal-body -->
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div>
+<div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
