@@ -13,9 +13,12 @@
             <li class="prop-item">
               <div class="form-group">
                 <label for="<%= key %>" class="col-sm-3 control-label"><%= key %></label>
-                <div class="col-sm-9">
+                <div class="col-sm-8">
                   <input type="text" class="form-control" id="<%= key %>" name="<%= key %>" value="<%= value %>">
-                </div> <!-- .col-sm-10 -->
+                </div> <!-- .col-sm-8 -->
+                <div class="col-sm-1">
+                  <button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></button>
+                </div>
               </div> <!-- .form-group -->
             </li>
           <% end %>
