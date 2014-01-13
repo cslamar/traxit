@@ -17,7 +17,7 @@
                   <input type="text" class="form-control" id="<%= key %>" name="<%= key %>" value="<%= value %>">
                 </div> <!-- .col-sm-8 -->
                 <div class="col-sm-1">
-                  <button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></button>
+                  <button class="btn btn-danger pull-right remove-btn"><span class="glyphicon glyphicon-trash"></span></button>
                 </div>
               </div> <!-- .form-group -->
             </li>
@@ -36,6 +36,10 @@
 </div><!-- /.modal-dialog -->
 
 <script>
+
+  $('button.remove-btn').click(function(){
+      $(this).closest('li').remove();
+  });
 
   $.fn.serializeObject = function() {
     var o = {};
