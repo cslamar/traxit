@@ -33,6 +33,17 @@ class ItemsController < ApplicationController
   	end
   end
 
+  def properties
+  	wid = params[:id]
+
+  	@active_widget = Widget.find(wid)
+
+  	respond_to do |format|
+  		format.html
+  		format.js
+  	end
+  end
+
   def service_create
   	# puts "Create #{params[:id]}"
 
@@ -97,6 +108,32 @@ class ItemsController < ApplicationController
   		## Dev
   		format.svg { render :qrcode => "#{request.protocol}#{request.host}:#{request.port}/items/info/#{params[:id]}", :level => :l, :unit => 10 }
   	end
+  end
+
+  def new_field
+    render partial: 'items/new_field'
+  end
+
+  def update_properties
+    active_widget = Widget.find(params[:id])
+
+    puts "Current Properties: #{active_widget.properties}"
+
+    props = ActiveSupport::JSON.decode(params[:props])
+    puts "JSON: #{props}"
+
+    active_widget.properties = props
+
+    if active_widget.save
+      respond_to do |format|
+        format.json { render json: {'success' => true}, status: :ok }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: {'success' => false}, status: 500 }
+      end
+    end
+
   end
 
 end

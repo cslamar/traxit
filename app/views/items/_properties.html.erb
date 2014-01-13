@@ -1,0 +1,124 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel"><%= "#{@active_widget.simple_name}'s Properties" %></h4>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-success notes-alert" hidden>Oh Snap, an alert!</div>
+
+      <ul id="prop-list">
+        <form class="form-horizontal" role="form" action="" method="post">
+          <% @active_widget.properties.each do |(key, value)| %>
+            <li class="prop-item">
+              <div class="form-group">
+                <label for="<%= key %>" class="col-sm-3 control-label"><%= key %></label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="<%= key %>" name="<%= key %>" value="<%= value %>">
+                </div> <!-- .col-sm-8 -->
+                <div class="col-sm-1">
+                  <button class="btn btn-danger pull-right remove-btn"><span class="glyphicon glyphicon-trash"></span></button>
+                </div>
+              </div> <!-- .form-group -->
+            </li>
+          <% end %>
+
+        </form>
+      </ul> <!-- #prop-list -->
+
+    </div> <!-- .modal-body -->
+    <div class="modal-footer">
+      <button id="add-field" class="btn btn-success pull-left"><span class="glyphicon glyphicon-plus"></span> Add Field</button>
+      <button id="complete-btn" type="button" class="btn btn-primary">Update</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+    </div> <!-- .modal-footer -->
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+<script>
+
+  $('button.remove-btn').click(function(){
+      $(this).closest('li').remove();
+  });
+
+  $.fn.serializeObject = function() {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+      if (o[this.name] !== undefined) {
+        if (!o[this.name].push) {
+          o[this.name] = [o[this.name]];
+        }
+        o[this.name].push(this.value || '');
+      } else {
+        o[this.name] = this.value || '';
+      }
+    });
+    return o;
+  };
+
+  var counter = 0;
+
+  $('#add-field').click(function(event) {
+    event.preventDefault();
+
+    counter++;
+
+    $.ajax({
+      url: '/items/new_field/' + counter,
+      type: 'GET'
+    })
+    .done(function(e) {
+//      console.log(e);
+//      console.log("success");
+
+      $(e).insertAfter('li.prop-item:last');
+    })
+    .fail(function(e) {
+      console.log(e);
+      console.log("error");
+    });
+  });
+
+  $('#complete-btn').click(function(event){
+//    event.preventDefault();
+    var additionalFields = {};
+
+    for( var i = 1; i <= counter; i++ ) {
+      var tmpKey = $('#new-key-' + i).prop('value');
+      var tmpValue = $('#new-value-' + i).prop('value');
+
+      $('#new-key-' + i).prop('name', '');
+      $('#new-value-' + i).prop('name', '');
+
+//      console.log(tmpKey + " - " + tmpValue);
+      additionalFields[tmpKey] = tmpValue;
+    }
+
+    var form_string = JSON.stringify( $('form').serializeObject() );
+    var tmp_data = JSON.parse(form_string);
+
+    var full_form_data = $.extend({}, tmp_data, additionalFields);
+
+    var form_data = JSON.stringify(full_form_data);
+
+    console.log(form_data);
+
+    $.ajax({
+      url: '/items/update_properties/' + "<%= @active_widget.id %>",
+      type: 'POST',
+      dataType: 'json',
+      data: { props : form_data}
+    })
+    .done(function(e){
+      console.log(e);
+      console.log('success');
+      location.reload();
+    })
+    .fail(function(e){
+      console.log(e);
+      console.log('error!!');
+    });
+
+  });
+</script>
