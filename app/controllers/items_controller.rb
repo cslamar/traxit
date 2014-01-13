@@ -115,13 +115,23 @@ class ItemsController < ApplicationController
   end
 
   def update_properties
+    active_widget = Widget.find(params[:id])
+
+    puts "Current Properties: #{active_widget.properties}"
 
     props = ActiveSupport::JSON.decode(params[:props])
     puts "JSON: #{props}"
-    puts "ID: #{params[:id]}"
 
-    respond_to do |format|
-      format.json { render json: {'something' => 'asdf'}, status: :ok }
+    active_widget.properties = props
+
+    if active_widget.save
+      respond_to do |format|
+        format.json { render json: {'success' => true}, status: :ok }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: {'success' => false}, status: 500 }
+      end
     end
 
   end

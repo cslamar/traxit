@@ -63,7 +63,7 @@
     })
     .done(function(e) {
 //      console.log(e);
-      console.log("success");
+//      console.log("success");
 
       $(e).insertAfter('li.prop-item:last');
     })
@@ -75,9 +75,26 @@
 
   $('#complete-btn').click(function(event){
 //    event.preventDefault();
+    var additionalFields = {};
 
-    var form_data = JSON.stringify( $('form').serializeObject() );
-//    var form_data = $("form").serialize();
+    for( var i = 1; i <= counter; i++ ) {
+      var tmpKey = $('#new-key-' + i).prop('value');
+      var tmpValue = $('#new-value-' + i).prop('value');
+
+      $('#new-key-' + i).prop('name', '');
+      $('#new-value-' + i).prop('name', '');
+
+//      console.log(tmpKey + " - " + tmpValue);
+      additionalFields[tmpKey] = tmpValue;
+    }
+
+    var form_string = JSON.stringify( $('form').serializeObject() );
+    var tmp_data = JSON.parse(form_string);
+
+    var full_form_data = $.extend({}, tmp_data, additionalFields);
+
+    var form_data = JSON.stringify(full_form_data);
+
     console.log(form_data);
 
     $.ajax({
@@ -89,7 +106,7 @@
     .done(function(e){
       console.log(e);
       console.log('success');
-//      location.reload();
+      location.reload();
     })
     .fail(function(e){
       console.log(e);
