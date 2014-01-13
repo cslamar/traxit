@@ -9,6 +9,7 @@ Traxit::Application.routes.draw do
   get 'items/new_field/:unique' => 'items#new_field'
   get 'items/properties/:id' => 'items#properties', :as => :properties
   post 'items/update_properties/:id' => 'items#update_properties'
+  post 'items/update_image' => 'items#update_image'
 
   get 'items/qr/:id' => 'items#qr', :as => :qr_code
   get 'items/info/:id' => 'items#info'

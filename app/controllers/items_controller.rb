@@ -136,4 +136,18 @@ class ItemsController < ApplicationController
 
   end
 
+  def update_image
+
+    uploaded_io = params[:image]
+
+    File.open(Rails.root.join('public', 'media', "#{params[:wid]}.jpg"), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+
+    flash[:notice] = 'Created New Image'
+    flash[:status] = 'success'
+
+    redirect_to :back
+  end
+
 end
