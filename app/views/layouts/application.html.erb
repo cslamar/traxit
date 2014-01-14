@@ -28,7 +28,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav side-nav">
-        <li class="active"><a href="/items"><span class="glyphicon glyphicon-list-alt"></span> Inventory</a></li>
+        <li class="<%= menu_button_class('items') %>">
+          <%= link_to controller: 'items', action: 'list' do %>
+            <span class="glyphicon glyphicon-list-alt"></span> Inventory</a>
+          <% end %>
+        </li>
         <li><a href="/handlers"><span class="glyphicon glyphicon-user"></span> Handlers</a></li>
         <li><a href="/locations"><span class="glyphicon glyphicon-globe"></span> Locations</a></li>
         <li class="dropdown">
