@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:no_time] = '%m/%d/%Y'

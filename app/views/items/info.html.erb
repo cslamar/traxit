@@ -66,6 +66,14 @@
 					<li>Location: <%= @active_widget.location %></li>
 					<li>Assigned to: TODO Person</li>
 				</ul>
+        <% if defined? @active_widget.purchase %>
+          <hr class="overview-spacer"/>
+          <h5>Purchase Information</h5>
+          <ul>
+            <li><%= "Price: " + number_to_currency(@active_widget.purchase['price']) %></li>
+            <li><%= "Purchase Date: " + @active_widget.purchase['purchase_date'].to_formatted_s(:no_time) %></li>
+          </ul>
+        <% end %>
 			</div> <!-- .panel-body -->
 		</div> <!-- .panel -->
 	</div> <!-- .col -->
