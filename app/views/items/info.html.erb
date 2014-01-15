@@ -105,10 +105,32 @@
 				<h3 class="panel-title">Image</h3>
 			</div> <!-- .panel-header -->
 			<div class="panel-body text-center">
-        <% Dir["public/media/#{@active_widget.id}/*.jpg"].each do |image| %>
-          <% image.gsub!('public', '') %>
-          <%= image_tag "#{image}", class: 'img-thumbnail img-responsive' %>
-        <% end %>
+        <div id="widget-image-carousel" class="carousel slide" data-ride="carousel" class="text-center">
+          <!-- Controls -->
+          <a class="left" href="#widget-image-carousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right" href="#widget-image-carousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <% Dir["public/media/#{@active_widget.id}/*.jpg"].each_with_index do |image, index| %>
+              <% if index == 0 %>
+                <div class="item active">
+                  <% image.gsub!('public', '') %>
+                  <%= image_tag "#{image}", class: 'img-thumbnail img-responsive' %>
+                </div> <!-- .item-active -->
+              <% else %>
+                <div class="item">
+                  <% image.gsub!('public', '') %>
+                  <%= image_tag "#{image}", class: 'img-thumbnail img-responsive' %>
+                </div> <!-- .item -->
+              <% end %>
+            <% end %>
+          </div> <!-- .carousel-inner -->
+        </div> <!-- #widget-image-carousel -->
 			</div> <!-- .panel-body -->
 		</div> <!-- .panel -->
 	</div> <!-- .col -->
