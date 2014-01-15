@@ -140,7 +140,10 @@ class ItemsController < ApplicationController
 
     uploaded_io = params[:image]
 
-    File.open(Rails.root.join('public', 'media', "#{params[:wid]}.jpg"), 'wb') do |file|
+    file_count = Dir["public/media/#{params[:wid]}/*.jpg"].count
+    file_count += 1
+
+    File.open(Rails.root.join('public', 'media', "#{params[:wid]}", "#{file_count}.jpg"), 'wb') do |file|
       file.write(uploaded_io.read)
     end
 

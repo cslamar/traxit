@@ -105,7 +105,10 @@
 				<h3 class="panel-title">Image</h3>
 			</div> <!-- .panel-header -->
 			<div class="panel-body text-center">
-				<%= image_tag "/media/#{@active_widget.id}.jpg", class: 'img-thumbnail img-responsive' %>
+        <% Dir["public/media/#{@active_widget.id}/*.jpg"].each do |image| %>
+          <% image.gsub!('public', '') %>
+          <%= image_tag "#{image}", class: 'img-thumbnail img-responsive' %>
+        <% end %>
 			</div> <!-- .panel-body -->
 		</div> <!-- .panel -->
 	</div> <!-- .col -->
