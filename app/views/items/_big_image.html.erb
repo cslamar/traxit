@@ -1,7 +1,11 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-body">
-      <%= image_tag "/media/#{@image_info[:wid]}/#{@image_info[:num]}.jpg", class: 'img-thumbnail img-responsive' %>
+      <div id="big-image-container">
+        <button id="big-image-remove" class="btn btn-xs btn-link"><span class="glyphicon glyphicon-remove-sign"></span></button>
+        <!--<h2><span id="big-image-remove" class="glyphicon glyphicon-remove-sign"></span></h2>-->
+        <%= image_tag "/media/#{@image_info[:wid]}/#{@image_info[:num]}.jpg", class: 'img-thumbnail img-responsive' %>
+      </div>
     </div> <!-- .modal-body -->
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

@@ -23,3 +23,18 @@ hr.overview-spacer {
   margin-top: 10px;
   margin-bottom: 0;
 }
+
+#big-image-container {
+  position: relative;
+}
+
+#big-image-remove {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+#big-image-remove > span {
+  color: rgb(168, 59, 59);
+  font-size: 2em;
+}
