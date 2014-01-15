@@ -154,6 +154,11 @@ class ItemsController < ApplicationController
     redirect_to :back
   end
 
+  def big_image
+    @image_info = Hash.new
+    @image_info = {:wid => params[:id], :num => params[:num]}
+  end
+
   def image
     @active_widget = params[:id]
 

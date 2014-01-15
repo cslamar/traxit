@@ -11,6 +11,7 @@ Traxit::Application.routes.draw do
   post 'items/update_properties/:id' => 'items#update_properties'
 
   get 'items/image/:id' => 'items#image', :as => :item_image
+  get 'items/big_image/:id/:num' => 'items#big_image', :as => :big_image
   post 'items/update_image' => 'items#update_image'
 
   get 'items/qr/:id' => 'items#qr', :as => :qr_code
