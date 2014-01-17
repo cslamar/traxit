@@ -100,12 +100,41 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
         <%= link_to item_image_path({:id => @active_widget.id}), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#image-modal", :class => "btn btn-xs btn-default pull-right"} do %>
-          <span class="glyphicon glyphicon-pencil"></span>
+          <span class="glyphicon glyphicon-plus"></span>
         <% end %>
 				<h3 class="panel-title">Image</h3>
 			</div> <!-- .panel-header -->
 			<div class="panel-body text-center">
-				<%= image_tag "/media/#{@active_widget.id}.jpg", class: 'img-thumbnail img-responsive' %>
+        <div id="widget-image-carousel" class="carousel slide" data-ride="carousel" class="text-center">
+          <!-- Controls -->
+          <a class="left" href="#widget-image-carousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right" href="#widget-image-carousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <% Dir["public/media/#{@active_widget.id}/*-thumb.jpg"].each_with_index do |image, index| %>
+              <% if index == 0 %>
+                <div class="item active">
+                  <% image.gsub!('public', '') %>
+                  <%= link_to big_image_path({:id => @active_widget.id, :num => image_num(image)}), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#big-image-modal"} do %>
+                    <%= image_tag "#{image}", class: 'img-thumbnail img-responsive' %>
+                  <% end %>
+                </div> <!-- .item-active -->
+              <% else %>
+                <div class="item">
+                  <% image.gsub!('public', '') %>
+                  <%= link_to big_image_path({:id => @active_widget.id, :num => image_num(image)}), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#big-image-modal"} do %>
+                    <%= image_tag "#{image}", class: 'img-thumbnail img-responsive' %>
+                  <% end %>
+                </div> <!-- .item -->
+              <% end %>
+            <% end %>
+          </div> <!-- .carousel-inner -->
+        </div> <!-- #widget-image-carousel -->
 			</div> <!-- .panel-body -->
 		</div> <!-- .panel -->
 	</div> <!-- .col -->
@@ -160,3 +189,4 @@
 <div class="modal fade" id="service-add-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <div class="modal fade" id="properties-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="big-image-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

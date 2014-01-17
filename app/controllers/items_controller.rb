@@ -140,7 +140,16 @@ class ItemsController < ApplicationController
 
     uploaded_io = params[:image]
 
-    File.open(Rails.root.join('public', 'media', "#{params[:wid]}.jpg"), 'wb') do |file|
+    last_image = Dir["public/media/#{params[:wid]}/*.jpg"].to_a.last
+    last_file_number = /(\d).jpg/.match(last_image).to_a[1]
+    file_count = last_file_number.to_i + 1
+
+    image_thumb = MiniMagick::Image.read(uploaded_io)
+    image_thumb.resize "200x200"
+    #image_thumb.write  "thumb-test.jpg"
+    image_thumb.write "public/media/#{params[:wid]}/#{file_count}-thumb.jpg"
+
+    File.open(Rails.root.join('public', 'media', "#{params[:wid]}", "#{file_count}.jpg"), 'wb') do |file|
       file.write(uploaded_io.read)
     end
 
@@ -150,6 +159,11 @@ class ItemsController < ApplicationController
     redirect_to :back
   end
 
+  def big_image
+    @image_info = Hash.new
+    @image_info = {:wid => params[:id], :num => params[:num]}
+  end
+
   def image
     @active_widget = params[:id]
 
@@ -157,6 +171,19 @@ class ItemsController < ApplicationController
       format.html
       format.js
     end
+  end
+
+  def remove_image
+    wid = params[:id]
+    num = params[:num]
+
+    File.delete(Rails.root + "public/media/#{wid}/#{num}.jpg")
+    File.delete(Rails.root + "public/media/#{wid}/#{num}-thumb.jpg")
+
+    flash[:notice] = 'Removed Image'
+    flash[:status] = 'danger'
+
+    redirect_to :back
   end
 
 end
