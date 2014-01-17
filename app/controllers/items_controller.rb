@@ -173,4 +173,17 @@ class ItemsController < ApplicationController
     end
   end
 
+  def remove_image
+    wid = params[:id]
+    num = params[:num]
+
+    File.delete(Rails.root + "public/media/#{wid}/#{num}.jpg")
+    File.delete(Rails.root + "public/media/#{wid}/#{num}-thumb.jpg")
+
+    flash[:notice] = 'Removed Image'
+    flash[:status] = 'danger'
+
+    redirect_to :back
+  end
+
 end

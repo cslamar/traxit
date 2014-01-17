@@ -2,8 +2,9 @@
   <div class="modal-content">
     <div class="modal-body">
       <div id="big-image-container">
-        <button id="big-image-remove" class="btn btn-xs btn-link"><span class="glyphicon glyphicon-remove-sign"></span></button>
-        <!--<h2><span id="big-image-remove" class="glyphicon glyphicon-remove-sign"></span></h2>-->
+        <%= link_to remove_image_path(:action => 'remove_image', :id => @image_info[:wid], :num => @image_info[:num]) do %>
+          <button id="big-image-remove" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+        <% end %>
         <%= image_tag "/media/#{@image_info[:wid]}/#{@image_info[:num]}.jpg", class: 'img-thumbnail img-responsive' %>
       </div>
     </div> <!-- .modal-body -->
