@@ -144,6 +144,11 @@ class ItemsController < ApplicationController
     last_file_number = /(\d).jpg/.match(last_image).to_a[1]
     file_count = last_file_number.to_i + 1
 
+    image_thumb = MiniMagick::Image.read(uploaded_io)
+    image_thumb.resize "200x200"
+    #image_thumb.write  "thumb-test.jpg"
+    image_thumb.write "public/media/#{params[:wid]}/#{file_count}-thumb.jpg"
+
     File.open(Rails.root.join('public', 'media', "#{params[:wid]}", "#{file_count}.jpg"), 'wb') do |file|
       file.write(uploaded_io.read)
     end

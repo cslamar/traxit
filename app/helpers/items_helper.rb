@@ -8,7 +8,7 @@ module ItemsHelper
   end
 
   def image_num(image)
-    return /(\d).jpg/.match(image).to_a[1].to_i
+    return /(\d)-thumb.jpg/.match(image).to_a[1].to_i
   end
 
 end

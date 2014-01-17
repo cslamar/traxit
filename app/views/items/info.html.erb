@@ -116,7 +116,7 @@
 
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
-            <% Dir["public/media/#{@active_widget.id}/*.jpg"].each_with_index do |image, index| %>
+            <% Dir["public/media/#{@active_widget.id}/*-thumb.jpg"].each_with_index do |image, index| %>
               <% if index == 0 %>
                 <div class="item active">
                   <% image.gsub!('public', '') %>
