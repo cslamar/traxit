@@ -9,7 +9,8 @@
         <%= label_tag(:image, "Choose Image to upload: ") %>
         <%= file_field_tag(:image) %>
         <%= hidden_field_tag(:wid, @active_widget) %>
-        <%= submit_tag("Upload", class: "btn btn-primary image-upload-btn") %>
+        <hr/>
+        <%= submit_tag("Upload", class: "btn btn-primary") %>
       <% end %>
     </div> <!-- .modal-body -->
   </div><!-- /.modal-content -->

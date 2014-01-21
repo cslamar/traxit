@@ -138,6 +138,10 @@ class ItemsController < ApplicationController
 
   def update_image
 
+    if !Dir.exists?("public/media/#{params[:wid]}")
+      Dir.mkdir "public/media/#{params[:wid]}"
+    end
+
     uploaded_io = params[:image]
 
     last_image = Dir["public/media/#{params[:wid]}/*.jpg"].to_a.last
