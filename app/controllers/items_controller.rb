@@ -149,8 +149,12 @@ class ItemsController < ApplicationController
     file_count = last_file_number.to_i + 1
 
     image_thumb = MiniMagick::Image.read(uploaded_io)
-    image_thumb.resize "200x200"
+
+    #image_thumb.resize "200x200"
     #image_thumb.write  "thumb-test.jpg"
+
+    image_thumb = resize_and_crop(image_thumb, 150)
+
     image_thumb.write "public/media/#{params[:wid]}/#{file_count}-thumb.jpg"
 
     File.open(Rails.root.join('public', 'media', "#{params[:wid]}", "#{file_count}.jpg"), 'wb') do |file|
@@ -190,4 +194,17 @@ class ItemsController < ApplicationController
     redirect_to :back
   end
 
+  private
+
+  def resize_and_crop(image, size)
+    if image[:width] < image[:height]
+      remove = ((image[:height] - image[:width])/2).round
+      image.shave("0x#{remove}")
+    elsif image[:width] > image[:height]
+      remove = ((image[:width] - image[:height])/2).round
+      image.shave("#{remove}x0")
+    end
+    image.resize("#{size}x#{size}")
+    return image
+  end
 end
