@@ -121,14 +121,14 @@
                 <div class="item active">
                   <% image.gsub!('public', '') %>
                   <%= link_to big_image_path({:id => @active_widget.id, :num => image_num(image)}), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#big-image-modal"} do %>
-                    <%= image_tag "#{image}", class: 'img-thumbnail img-responsive' %>
+                    <%= image_tag "#{image}", class: 'img-thumbnail img-responsive center-img', style: 'display: inline-block' %>
                   <% end %>
                 </div> <!-- .item-active -->
               <% else %>
                 <div class="item">
                   <% image.gsub!('public', '') %>
                   <%= link_to big_image_path({:id => @active_widget.id, :num => image_num(image)}), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#big-image-modal"} do %>
-                    <%= image_tag "#{image}", class: 'img-thumbnail img-responsive' %>
+                    <%= image_tag "#{image}", class: 'img-thumbnail img-responsive center-img', style: 'display: inline-block'  %>
                   <% end %>
                 </div> <!-- .item -->
               <% end %>
