@@ -1,5 +1,8 @@
 Traxit::Application.routes.draw do
 
+  get 'items/new' => 'items#new'
+  post 'items/create' => 'items#create'
+
   patch 'items/complete' => 'items#complete'
   patch 'items/reset' => 'items#reset'
   
