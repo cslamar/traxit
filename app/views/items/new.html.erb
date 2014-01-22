@@ -78,7 +78,11 @@
       </div> <!-- panel-heading -->
 
       <div class="panel-body">
-
+        <ul>
+          <% properties_map_reducer.each do |prop| %>
+            <li><%= prop %></li>
+          <% end %>
+        </ul>
       </div> <!-- .panel-body -->
 
     </div> <!-- .panel -->
