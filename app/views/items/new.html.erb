@@ -78,11 +78,11 @@
       </div> <!-- panel-heading -->
 
       <div class="panel-body">
-        <ul>
-          <% properties_map_reducer.each do |prop| %>
-            <li><%= prop %></li>
+        <select name="prop-list" id="props">
+          <% properties_map_reducer.each do |props| %>
+            <option value="<%= props %>"><%= props %></option>
           <% end %>
-        </ul>
+        </select>
       </div> <!-- .panel-body -->
 
     </div> <!-- .panel -->
