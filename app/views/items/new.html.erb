@@ -74,14 +74,16 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Properties</h3>
+        <h3 class="panel-title">Properties: <small>Select</small></h3>
       </div> <!-- panel-heading -->
 
       <div class="panel-body">
         <select name="prop-list" id="props">
+          <option value=""></option>
           <% properties_map_reducer.each do |props| %>
             <option value="<%= props %>"><%= props %></option>
           <% end %>
+          <option value="new-property">+ New Property</option>
         </select>
       </div> <!-- .panel-body -->
 
