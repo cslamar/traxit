@@ -78,6 +78,11 @@
       </div> <!-- panel-heading -->
 
       <div class="panel-body">
+
+        <ul id="props-list">
+
+        </ul>
+
         <select name="prop-list" id="props">
           <option value=""></option>
           <% properties_map_reducer.each do |props| %>
@@ -91,4 +96,29 @@
   </div> <!-- .col-lg-12 -->
 </div> <!-- .row -->
 
+<div class="row">
+  <div class="col-lg-12">
+    <%= f.submit "Create", id: "create-btn", class: 'btn btn-primary pull-right' %>
+  </div> <!--.col-lg-12-->
+</div> <!--.row-->
+
 <% end %>
+
+<script>
+  $('#props').change(function() {
+
+    var selected_prop = $('#props option:selected').prop('value');
+    $('#props option:selected').remove();
+
+    console.log(selected_prop);
+
+//    $('#props-list').append('<li>' + selected_prop + '</li>');
+
+    var html = '<li>';
+    html += '<label for="' + selected_prop + '">' + selected_prop + '</label>';
+    html += '<input class="form-control" id="' + selected_prop + '">';
+    html += '</li>';
+
+    $('#props-list').append(html);
+  });
+</script>
