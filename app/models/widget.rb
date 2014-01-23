@@ -9,4 +9,8 @@ class Widget
 
   embeds_many :services
 
+  validates :simple_name, presence: true
+  validates :description, presence: true
+  validates :purchase, presence: true
+
 end

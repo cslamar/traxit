@@ -3,6 +3,33 @@ class ItemsController < ApplicationController
   	@widget_list = Widget.all
   end
 
+  def create
+
+    if params[:purchase] == ""
+      flash[:notice] = 'Failed to Create Widget!  Must have purchase info!'
+      flash[:status] = 'danger'
+      redirect_to :back
+    end
+
+    w = Widget.create(params[:widget])
+    w.properties = params[:properties]
+
+    w.purchase['purchase_date'] = w.purchase['purchase_date'].to_time
+
+    if w.save
+      flash[:notice] = 'Created Widget'
+      flash[:status] = 'success'
+
+      redirect_to(:controller => 'items', :action => 'list')
+    else
+      flash[:notice] = 'Failed to Create Widget'
+      flash[:status] = 'danger'
+
+      redirect_to :back
+    end
+
+  end
+
   def info
   	@active_widget = Widget.find(params[:id])
   	@service_list = @active_widget.services.sort_by{|e| e[:start]}.reverse
@@ -192,6 +219,12 @@ class ItemsController < ApplicationController
     flash[:status] = 'danger'
 
     redirect_to :back
+  end
+
+  def propitem
+    @property = params[:property]
+
+    render partial: 'items/propitem'
   end
 
   private
