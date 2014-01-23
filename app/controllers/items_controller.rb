@@ -5,6 +5,25 @@ class ItemsController < ApplicationController
 
   def create
 
+    w = Widget.create(params[:widget])
+    w.properties = params[:properties]
+
+    w.purchase['purchase_date'] = w.purchase['purchase_date'].to_time
+
+    # Widget.create(simple_name: params[:simple_name], description: params[:description], purchase: params[:purchase], properties: params[:properties])
+
+    if w.save
+      flash[:notice] = 'Created Widget'
+      flash[:status] = 'success'
+
+      redirect_to(:controller => 'items', :action => 'list')
+    else
+      flash[:notice] = 'Failed to add Service Task'
+      flash[:status] = 'danger'
+
+      redirect_to :back
+    end
+
   end
 
   def info
