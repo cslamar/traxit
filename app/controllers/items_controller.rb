@@ -198,6 +198,12 @@ class ItemsController < ApplicationController
     redirect_to :back
   end
 
+  def propitem
+    @property = params[:property]
+
+    render partial: 'items/propitem'
+  end
+
   private
 
   def resize_and_crop(image, size)

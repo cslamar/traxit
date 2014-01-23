@@ -75,14 +75,6 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Properties: <small>Select</small></h3>
-      </div> <!-- panel-heading -->
-
-      <div class="panel-body">
-
-        <ul id="props-list">
-
-        </ul>
-
         <select name="prop-list" id="props">
           <option value=""></option>
           <% properties_map_reducer.each do |props| %>
@@ -90,6 +82,13 @@
           <% end %>
           <option value="new-property">+ New Property</option>
         </select>
+      </div> <!-- panel-heading -->
+
+      <div class="panel-body">
+
+        <div id="props-list"></div>
+
+
       </div> <!-- .panel-body -->
 
     </div> <!-- .panel -->
@@ -105,6 +104,27 @@
 <% end %>
 
 <script>
+
+  function getPropsEntry(prop) {
+    var results;
+
+    $.ajax({
+      async: false,
+      url: '/items/propitem/' + prop,
+      type: 'GET',
+    }).done(function(e){
+//      console.log(e);
+      console.log('Success!');
+
+      results = e;
+    }).fail(function(e){
+      console.log(e);
+      console.log('Error!!');
+    });
+
+    return results;
+  }
+
   $('#props').change(function() {
 
     var selected_prop = $('#props option:selected').prop('value');
@@ -112,13 +132,10 @@
 
     console.log(selected_prop);
 
-//    $('#props-list').append('<li>' + selected_prop + '</li>');
+    var prop_item = getPropsEntry(selected_prop);
 
-    var html = '<li>';
-    html += '<label for="' + selected_prop + '">' + selected_prop + '</label>';
-    html += '<input class="form-control" id="' + selected_prop + '">';
-    html += '</li>';
+    console.log(prop_item);
 
-    $('#props-list').append(html);
+    $('#props-list').append(prop_item);
   });
 </script>
