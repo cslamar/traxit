@@ -10,6 +10,9 @@ Traxit::Application.routes.draw do
   get 'items/service_add/:id' => 'items#service_add', :as => :service_add
   post 'items/service_create/:id' => 'items#service_create'
 
+  get 'items/overview/:id' => 'items#overview', :as => :item_overview
+  delete 'items/info/:id' => 'items#destroy'
+
   get 'items/new_field/:unique' => 'items#new_field'
   get 'items/properties/:id' => 'items#properties', :as => :properties
   post 'items/update_properties/:id' => 'items#update_properties'

@@ -57,7 +57,9 @@
 	<div class="col-lg-4">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<button class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-pencil"></span></button>
+        <%= link_to item_overview_path(id: @active_widget.id), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#overview-modal"} do %>
+				  <button class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-pencil"></span></button>
+        <% end %>
 				<h3 class="panel-title">Item Overview</h3>
 			</div> <!-- .panel-heading -->
 			<div class="panel-body">
@@ -190,3 +192,4 @@
 <div class="modal fade" id="properties-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <div class="modal fade" id="big-image-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="overview-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

@@ -1,0 +1,15 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Overview</h4>
+    </div> <!--.modal-header-->
+    <div class="modal-body">
+      <p>Hi There</p>
+    </div> <!-- .modal-body -->
+    <div class="modal-footer">
+      <%= button_to "Delete Widget", @active_widget, :confirm => 'Are you sure you want to remove this widget?', :method => :delete, class: 'btn btn-danger pull-left' %>
+      <button class="btn btn-success">Update</button>
+    </div> <!--.modal-footer-->
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

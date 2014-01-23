@@ -227,6 +227,30 @@ class ItemsController < ApplicationController
     render partial: 'items/propitem'
   end
 
+  def overview
+    #@active_widget = Widget.find(params[:id])
+    @active_widget = params[:id]
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def destroy
+    w = Widget.find(params[:id])
+
+    if w.destroy
+      flash[:notice] = 'Successfully Removed Widget!!'
+      flash[:status] = 'success'
+    else
+      flash[:notice] = 'Widget could not be removed'
+      flash[:status] = 'warning'
+    end
+
+    redirect_to controller: 'items', action: 'list'
+  end
+
   private
 
   def resize_and_crop(image, size)
