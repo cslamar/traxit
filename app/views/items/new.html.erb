@@ -88,7 +88,6 @@
 
         <div id="props-list"></div>
 
-
       </div> <!-- .panel-body -->
 
     </div> <!-- .panel -->
@@ -130,11 +129,11 @@
     var selected_prop = $('#props option:selected').prop('value');
     $('#props option:selected').remove();
 
-    console.log(selected_prop);
+//    console.log(selected_prop);
 
     var prop_item = getPropsEntry(selected_prop);
 
-    console.log(prop_item);
+//    console.log(prop_item);
 
     $('#props-list').append(prop_item);
   });
