@@ -52,14 +52,14 @@
           <div class="form-group">
             <%= p.label(:price, "Price", class: 'control-label col-lg-3') %>
             <div class="col-lg-9">
-              <%= p.text_field(:price, class: 'form-control') %>
+              <%= p.text_field(:price, value: '0' ,class: 'form-control', type: 'number') %>
             </div> <!-- .col-lg-9 -->
           </div> <!-- price .form-group -->
 
           <div class="form-group">
             <%= p.label(:purchase_date, class: 'control-label col-lg-3') %>
             <div class="col-lg-9">
-              <%= p.date_field(:purchase_date, class: 'form-control') %>
+              <%= p.date_field(:purchase_date, value: Date.today, class: 'form-control') %>
             </div> <!-- .col-lg-9 -->
           </div> <!-- purchase_date .form-group -->
         <% end %>
