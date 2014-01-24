@@ -11,6 +11,7 @@ Traxit::Application.routes.draw do
   post 'items/service_create/:id' => 'items#service_create'
 
   get 'items/overview/:id' => 'items#overview', :as => :item_overview
+  post 'items/update_manual' => 'items#update_manual'
   delete 'items/info/:id' => 'items#destroy'
 
   get 'items/new_field/:unique' => 'items#new_field'

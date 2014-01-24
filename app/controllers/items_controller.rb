@@ -194,6 +194,21 @@ class ItemsController < ApplicationController
     redirect_to :back
   end
 
+  def update_manual
+    if !Dir.exists?("public/media/#{params[:wid]}")
+      Dir.mkdir "public/media/#{params[:wid]}"
+    end
+
+    File.open(Rails.root.join('public', 'media', "#{params[:wid]}.pdf"), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+
+    flash[:notice] = 'Uploaded Service Manual'
+    flash[:status] = 'success'
+
+    redirect_to :back
+  end
+
   def big_image
     @image_info = Hash.new
     @image_info = {:wid => params[:id], :num => params[:num]}
