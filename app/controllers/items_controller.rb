@@ -195,11 +195,14 @@ class ItemsController < ApplicationController
   end
 
   def update_manual
+
+    uploaded_io = params[:service_manual]
+
     if !Dir.exists?("public/media/#{params[:wid]}")
       Dir.mkdir "public/media/#{params[:wid]}"
     end
 
-    File.open(Rails.root.join('public', 'media', "#{params[:wid]}.pdf"), 'wb') do |file|
+    File.open(Rails.root.join('public', 'media', "#{params[:wid]}", "#{params[:wid]}.pdf"), 'wb') do |file|
       file.write(uploaded_io.read)
     end
 

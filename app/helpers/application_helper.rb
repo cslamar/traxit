@@ -5,4 +5,8 @@ module ApplicationHelper
       return 'active'
     end
   end
+
+  def check_service_manual
+
+  end
 end
