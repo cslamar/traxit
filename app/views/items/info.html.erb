@@ -60,7 +60,11 @@
         <%= link_to item_overview_path(id: @active_widget.id), { :remote => true, 'data-toggle' => "modal", 'data-target' => "#overview-modal"} do %>
 				  <button class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-pencil"></span></button>
         <% end %>
-        <button class="btn btn-xs btn-default btn-manual pull-right"><span class="glyphicon glyphicon-book"></span></button>
+        <% if check_service_manual(@active_widget.id, @active_widget['simple_name']) %>
+          <%= link_to "/media/#{@active_widget.id}/#{regex_simple_name(@active_widget['simple_name'])}.pdf" do %>
+            <button class="btn btn-xs btn-default btn-manual pull-right"><span class="glyphicon glyphicon-book"></span></button>
+          <% end %>
+        <% end %>
 				<h3 class="panel-title">Item Overview</h3>
 			</div> <!-- .panel-heading -->
 			<div class="panel-body">
