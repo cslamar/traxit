@@ -196,13 +196,18 @@ class ItemsController < ApplicationController
 
   def update_manual
 
+    current_widget = Widget.find(params[:wid])
+
     uploaded_io = params[:service_manual]
+
+    tmp_name = current_widget['simple_name'].gsub(/\'/,'')
+    tmp_name = tmp_name.gsub(/\s/,'_')
 
     if !Dir.exists?("public/media/#{params[:wid]}")
       Dir.mkdir "public/media/#{params[:wid]}"
     end
 
-    File.open(Rails.root.join('public', 'media', "#{params[:wid]}", "#{params[:wid]}.pdf"), 'wb') do |file|
+    File.open(Rails.root.join('public', 'media', "#{params[:wid]}", "#{tmp_name}.pdf"), 'wb') do |file|
       file.write(uploaded_io.read)
     end
 
