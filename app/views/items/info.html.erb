@@ -71,8 +71,7 @@
 				<ul>
 					<li>ID: <%= @active_widget.id %></li>
 					<li>Location: <%= @active_widget.location %></li>
-					<li>Assigned to: <%= @active_widget.handler ? @active_widget.handler.full_name : 'Not Assigned' %>
-					</li>
+					<li>Assigned to: <%= @active_widget.handler ? @active_widget.handler.full_name : 'Not Assigned' %></li>
 				</ul>
         <% if defined? @active_widget.purchase %>
           <hr class="overview-spacer"/>

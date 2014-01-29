@@ -250,6 +250,12 @@ class ItemsController < ApplicationController
     render partial: 'items/propitem'
   end
 
+  def person
+    @person = params[:person]
+
+    render partial: 'items/person'
+  end
+
   def overview
     #@active_widget = Widget.find(params[:id])
     @active_widget = params[:id]

@@ -37,4 +37,32 @@ module ItemsHelper
     return property_list
   end
 
+  def people_map_reducer
+    map = %q{
+      function() {
+        var name = "";
+        for(var i in this.handler){
+          name = this.handler['first_name'] + ' ' + this.handler['last_name'];
+        }
+        emit(name, null);
+      }
+    }
+
+    reduce = %q{
+      function(key, stuff) {
+        return null;
+      }
+    }
+
+    results = Widget.map_reduce(map, reduce).out(inline: true)
+
+    people_list = Array.new
+
+    results.each do |r|
+      people_list.push(r["_id"])
+    end
+
+    return people_list.sort
+  end
+
 end
