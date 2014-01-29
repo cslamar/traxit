@@ -6,7 +6,12 @@
     </div> <!--.modal-header-->
     <div class="modal-body">
 
+        <div class="alert alert-warning" hidden>
+          <p id="alert-message"></p>
+        </div> <!--.alert-->
+
       <ul>
+
         <li>
           <label for="service-manual-cb">Service Manual</label>
           <input type="checkbox" name="service-manual-cb" id="service-manual-cb"/>
@@ -20,19 +25,43 @@
             <% end %>
           </div> <!--div.service-manual-->
         </li>
+
         <li>
           <label for="handler-cb">Assign Handler</label>
           <input type="checkbox" name="handler-cb" id="handler-cb"/>
-          <div class="handler">
-            <select name="handler" id="handler-dd">
-              <option value="">No One</option>
-              <% people_map_reducer.each do |person| %>
-                <option value="<%= "#{person}" %>"><%= "#{person}" %></option>
-              <% end %>
-              <option value="">+ New Handler</option>
-            </select>
-          </div> <!--div.handler-->
         </li>
+
+          <div class="handler" hidden>
+
+            <div class="radio">
+              <label>
+                <input type="radio" name="handler-radio" id="optionsRadios1" checked>
+                <input type="hidden" value="No One"/>
+                No One
+              </label>
+            </div>
+
+            <div class="radio">
+              <label>
+                <input type="radio" name="handler-radio" id="optionsRadios2">
+                  <select name="handler" id="handler-dd">
+                    <% people_map_reducer.each do |person| %>
+                      <option value="<%= "#{person}" %>"><%= "#{person}" %></option>
+                    <% end %>
+                  </select>
+              </label>
+            </div>
+
+            <div class="radio">
+              <label>
+                <input type="radio" name="handler-radio" id="optionsRadios3" value="option3">
+                <input type="text" class="form-control" id="new-handler-text" placeholder="Handler's Name">
+              </label>
+            </div>
+
+            <button class="btn btn-primary" id="test-btn">Test</button>
+          </div> <!--div.handler-->
+
       </ul>
 
     </div> <!-- .modal-body -->
@@ -46,5 +75,21 @@
 <script>
   $('#service-manual-cb').change(function(){
     $('div.service-manual').toggle('fast');
+  });
+
+  $('#handler-cb').change(function(){
+    $('div.handler').toggle('fast');
+  });
+
+  $('#test-btn').click(function(){
+
+    var nv = $('input[name=handler-radio]:checked').next().val();
+    console.log('Next Value: ' + nv);
+
+    if(nv == '') {
+      $('#alert-message').text("Please Enter a Handler's Name!");
+      $('div.alert-warning').toggle('fast');
+    }
+
   });
 </script>
