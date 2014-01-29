@@ -40,7 +40,6 @@ module ItemsHelper
   def people_map_reducer
     map = %q{
       function() {
-        var name = "";
         for(var i in this.handler){
           name = this.handler['first_name'] + ' ' + this.handler['last_name'];
         }

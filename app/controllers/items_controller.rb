@@ -250,10 +250,50 @@ class ItemsController < ApplicationController
     render partial: 'items/propitem'
   end
 
-  def person
-    @person = params[:person]
+  def assign_handler
+    new_handler = params[:assigned_handler].split(' ')
+    active_widget = Widget.find(params[:wid])
 
-    render partial: 'items/person'
+    puts "New Handler: #{new_handler}"
+
+    if params[:assigned_handler] == 'none'
+      if active_widget.handler != nil
+        active_widget.handler.destroy
+        active_widget.save
+      end
+
+      flash[:notice] = 'Assigned to No One'
+      flash[:status] = 'warning'
+
+      redirect_to(:controller => 'items', :action => 'info', :id => active_widget.id)
+
+    elsif active_widget.handler == nil
+      h = Handler.new(first_name: new_handler[0], last_name: new_handler[1])
+      active_widget.handler = h
+      active_widget.save
+
+      flash[:notice] = "Assigned to #{params[:assigned_handler]}"
+      flash[:status] = 'success'
+
+      redirect_to(:controller => 'items', :action => 'info', :id => active_widget.id)
+    elsif active_widget.handler != nil
+      if !active_widget.handler.check_name(new_handler[0], new_handler[1])
+        h = Handler.new(first_name: new_handler[0], last_name: new_handler[1])
+        active_widget.handler = h
+        active_widget.save
+      end
+
+      flash[:notice] = "Assigned to #{params[:assigned_handler]}"
+      flash[:status] = 'success'
+
+      redirect_to(:controller => 'items', :action => 'info', :id => active_widget.id)
+    else
+      flash[:notice] = "I don't know what to do so I'm freaking out!!!"
+      flash[:status] = 'danger'
+
+      redirect_to(:controller => 'items', :action => 'info', :id => active_widget.id)
+    end
+
   end
 
   def overview

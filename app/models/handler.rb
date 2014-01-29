@@ -13,4 +13,12 @@ class Handler
     return "#{first_name} #{last_name}"
   end
 
+  def check_name(fname, lname)
+    if fname == first_name && lname == last_name
+      return true
+    else
+      return false
+    end
+  end
+
 end

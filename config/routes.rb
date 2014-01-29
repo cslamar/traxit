@@ -12,6 +12,7 @@ Traxit::Application.routes.draw do
 
   get 'items/overview/:id' => 'items#overview', :as => :item_overview
   post 'items/update_manual' => 'items#update_manual'
+  post 'items/assign_handler' => 'items#assign_handler'
   delete 'items/info/:id' => 'items#destroy'
 
   get 'items/new_field/:unique' => 'items#new_field'
