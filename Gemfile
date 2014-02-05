@@ -43,6 +43,7 @@ gem 'capistrano', group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'mongoid', git: "git://github.com/mongoid/mongoid.git"
+gem 'moped', git: "https://github.com/mongoid/moped.git"
 
 gem 'rqrcode-rails3'
 gem 'mini_magick'
