@@ -43,14 +43,7 @@
               </div>
 
               <div class="radio">
-                <label>
-                  <input type="radio" name="handler-radio" id="optionsRadios2">
-                    <select name="handler" id="handler-dd">
-                      <% people_map_reducer.each do |person| %>
-                        <option value="<%= "#{person}" %>"><%= "#{person}" %></option>
-                      <% end %>
-                    </select>
-                </label>
+                <%= render partial: 'handler_select' %>
               </div>
 
               <div class="radio">

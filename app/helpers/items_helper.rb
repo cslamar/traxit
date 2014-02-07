@@ -40,10 +40,15 @@ module ItemsHelper
   def people_map_reducer
     map = %q{
       function() {
-        for(var i in this.handler){
-          name = this.handler['first_name'] + ' ' + this.handler['last_name'];
+        var name = "";
+        if (this.handler === undefined) {
+          emit(null, null);
+        } else {
+          for(var i in this.handler){
+            name = this.handler['first_name'] + ' ' + this.handler['last_name'];
+          }
+          emit(name, null);
         }
-        emit(name, null);
       }
     }
 
@@ -58,7 +63,9 @@ module ItemsHelper
     people_list = Array.new
 
     results.each do |r|
-      people_list.push(r["_id"])
+      if !r["_id"].nil?
+        people_list.push(r["_id"])
+      end
     end
 
     return people_list.sort
